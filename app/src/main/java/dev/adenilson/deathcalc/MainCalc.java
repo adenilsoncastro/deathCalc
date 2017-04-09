@@ -12,7 +12,6 @@ public class MainCalc extends AppCompatActivity {
     private TextView anoNascimento;
     private TextView anosJaFumou;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
