@@ -97,9 +97,9 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
 
     private void updateText()
     {
-        diaNascimentoTextView.setText(diaNascimento);
-        mesNascimentoTextView.setText(mesNascimento);
-        anoNascimentoTextView.setText(anoNascimento);
-        qtdAnosJaFumouTextView.setText(qtdAnosJaFumou);
+        diaNascimentoTextView.setText(Integer.toString(diaNascimento));
+        mesNascimentoTextView.setText(Integer.toString(mesNascimento));
+        anoNascimentoTextView.setText(Integer.toString(anoNascimento));
+        qtdAnosJaFumouTextView.setText(Integer.toString(qtdAnosJaFumou));
     }
 }
