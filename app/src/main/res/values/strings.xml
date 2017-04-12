@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">R.I.P.</string>
+
+    <string-array name="humor_options">
+        <item>Otimista</item>
+        <item>Depressivo</item>
+        <item>Estressado</item>
+    </string-array>
 </resources>

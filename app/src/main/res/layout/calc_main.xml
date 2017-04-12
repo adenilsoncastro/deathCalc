@@ -116,7 +116,9 @@
                 <SeekBar
                     android:id="@+id/seekBarAno"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:max="14"
+                    android:progress="1" />
 
                 <TextView
                     android:id="@+id/textViewSeekBarAno"
@@ -180,17 +182,19 @@
                 android:layout_marginTop="5dp">
 
                 <SeekBar
-                    android:id="@+id/seekBarFumou"
+                    android:id="@+id/seekBarQtdFumou"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_span="2" />
+                    android:layout_span="2"
+                    android:max="50"
+                    android:progress="1" />
 
                 <TextView
-                    android:id="@+id/textViewFumouQtdAnos"
+                    android:id="@+id/textViewQtdAnosFumou"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:ems="5"/>
+                    android:ems="5"
+                    android:textColor="@color/colorAccent" />
             </TableRow>
 
         </TableLayout>
