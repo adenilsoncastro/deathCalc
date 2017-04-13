@@ -244,6 +244,7 @@
             android:layout_alignParentStart="false"
             android:layout_below="@+id/tableLayoutResultFinal"
             android:layout_centerHorizontal="true"
+            android:onClick="voltar"
             android:text="Voltar" />
 
     </RelativeLayout>

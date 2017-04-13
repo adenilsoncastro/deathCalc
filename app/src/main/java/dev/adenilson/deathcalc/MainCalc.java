@@ -1,10 +1,13 @@
 package dev.adenilson.deathcalc;
 
+import android.content.Intent;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -97,9 +100,57 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
 
     private void updateText()
     {
-        diaNascimentoTextView.setText(Integer.toString(diaNascimento));
-        mesNascimentoTextView.setText(Integer.toString(mesNascimento));
-        anoNascimentoTextView.setText(Integer.toString(anoNascimento));
+        diaNascimentoTextView.setText(Integer.toString(diaNascimento)); // Por que o textview não aceita o inteiro?
+
+        switch(mesNascimento){
+            case 1:
+                mesNascimentoTextView.setText("Jan");
+                break;
+            case 2:
+                mesNascimentoTextView.setText("Fev");
+                break;
+            case 3:
+                mesNascimentoTextView.setText("Mar");
+                break;
+            case 4:
+                mesNascimentoTextView.setText("Abr");
+                break;
+            case 5:
+                mesNascimentoTextView.setText("Mai");
+                break;
+            case 6:
+                mesNascimentoTextView.setText("Jun");
+                break;
+            case 7:
+                mesNascimentoTextView.setText("Jul");
+                break;
+            case 8:
+                mesNascimentoTextView.setText("Ago");
+                break;
+            case 9:
+                mesNascimentoTextView.setText("Set");
+                break;
+            case 10:
+                mesNascimentoTextView.setText("Out");
+                break;
+            case 11:
+                mesNascimentoTextView.setText("Nov");
+                break;
+            case 12:
+                mesNascimentoTextView.setText("Dez");
+                break;
+
+            default:
+                mesNascimentoTextView.setText("");
+                break;
+        }
+        anoNascimentoTextView.setText(Integer.toString(anoNascimento + 1950));
         qtdAnosJaFumouTextView.setText(Integer.toString(qtdAnosJaFumou));
+    }
+
+    public void calcular(View view)
+    {
+        Intent i = new Intent(this, result.class);
+        startActivity(i);
     }
 }
