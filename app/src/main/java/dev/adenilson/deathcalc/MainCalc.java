@@ -74,6 +74,7 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHumor.setAdapter(adapter);
     }
+
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if(seekBar.getId() == R.id.seekBarDia)
@@ -90,12 +91,10 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
     }
 
     private void updateText()
@@ -148,9 +147,34 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         qtdAnosJaFumouTextView.setText(Integer.toString(qtdAnosJaFumou));
     }
 
-    public void calcular(View view)
-    {
+    public void calcular(View view) {
         Intent i = new Intent(this, result.class);
+
+        i.putExtra("diaNascimento", diaNascimento);
+        i.putExtra("mesNascimento", mesNascimento);
+        i.putExtra("anoNascimento", anoNascimento);
+        i.putExtra("religiao", GetReligiao());
+        i.putExtra("humor", spinnerHumor.getSelectedItem().toString());
+        i.putExtra("jaFumou", jaFumou.isChecked());
+        if(jaFumou.isChecked()){
+            i.putExtra("qtdAnosJaFumou", qtdAnosJaFumou);
+        }
+
         startActivity(i);
+    }
+
+    public String GetReligiao(){
+        if(radioAteu.isChecked())
+            return "ATEU";
+        if(radioCristao.isChecked())
+            return "CRISTAO";
+        if(radioJudeu.isChecked())
+            return "JUDEU";
+        if(radioMuculmano.isChecked())
+            return "MUCULMANO";
+        if(radioSatanista.isChecked())
+            return "SATANISTA";
+
+        return "";
     }
 }

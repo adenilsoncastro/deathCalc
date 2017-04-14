@@ -3,129 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="582a87748b235194660a297ea8c128ef3131cc0b">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c67bb6b6abc27edb18ac7ad1033ac07b443385e1\classes.dex" />
+        sha1="0c741ee57cb9506c49c01e6cdd5be467efd2f750">
+        <dex dex="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6d352b11c4cd8276ea0469ab756ef0758f2b1c27\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Adenilson\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.3.1_dafecf3f35d3a20236a324779c3c57f724faef2f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\a969a703785c97a4c0df008c3ea1d124b253a883\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_34b5a84cbf0d25499b0e1f57debb3af6916f8738\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\70a9299b2c52b04b592a241815768a07202ec7ac\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_96cefe32da1529aad9e0ca1cfd672ee757be7976\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_de201118a2b163445109bc72562beaf3e8e66419\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\3a9904a0f379cbbac60228b35b22f90da9ff8457\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_20cfdb8d10dfae370f658b88f628b0765d68e3d3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_1f2368c215d71e86f3ee905d2975bc2042d46a76\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\90222a6095548e5c6d41b27b40661a59463f346d\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1afe6d787e55337517752c4ba274a78c1c3a6623\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\92596f73a221f721e4a1b1ff922767c55b4af9eb\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_43455c2d12eb3ea9e166e1727af28dcd36409903\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\4b46112878fe40cc55172ed1eb566ea651bc13ea\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_059056d10bd4c3a22d11cf1a73fd61c307ddf98c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\d6e2133dd8e61b8f258a49d2ecff629393ad2798\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1251e548eb07b71cae8600f03cd999e09ac35617\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\663925cdd55f9a7f0ca6e8ba329ecf1d1d1297c3\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_25a83efe3f8fc77d3bc5ba13973da3ec8e0cdfb6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\a7df2aaa5ad6fcd188387fcd7f5fc851a0414302\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3197ac4f4ea50219f44ad397630c2ff70af3ef5a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Adenilson\.android\build-cache\f75bb0afefa375560bdeff1ab8c7468f9a367d19\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ba10d762411a1ad33231f1529fac228171019d76\classes.dex" />
+        <dex dex="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_cbb982eb35731153275d09a954ced499fc3a81b6\classes.dex" />
     </item>
 
 </items>
