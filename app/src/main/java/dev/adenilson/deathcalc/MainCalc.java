@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
 
     private int diaNascimento;
     private int mesNascimento;
@@ -33,22 +33,31 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
     private RadioButton radioMuculmano;
     private RadioButton radioSatanista;
 
+    private SeekBar diaSeekBar;
+    private SeekBar mesSeekBar;
+    private SeekBar anoSeekBar;
+    private SeekBar qtdAnosFumouSeekbar;
+
     private Spinner spinnerHumor;
+
+    private TextView textViewAnosFumou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calc_main);
 
+        textViewAnosFumou = (TextView)findViewById(R.id.textViewAnosFumou);
+
         diaNascimentoTextView = (TextView)findViewById(R.id.textViewSeekBarDia);
         mesNascimentoTextView = (TextView)findViewById(R.id.textViewSeekBarMes);
         anoNascimentoTextView = (TextView)findViewById(R.id.textViewSeekBarAno);
         qtdAnosJaFumouTextView = (TextView)findViewById(R.id.textViewQtdAnosFumou);
 
-        SeekBar diaSeekBar = (SeekBar) findViewById(R.id.seekBarDia);
-        SeekBar mesSeekBar = (SeekBar) findViewById(R.id.seekBarMes);
-        SeekBar anoSeekBar = (SeekBar) findViewById(R.id.seekBarAno);
-        SeekBar qtdAnosFumouSeekbar = (SeekBar) findViewById(R.id.seekBarQtdFumou);
+        diaSeekBar = (SeekBar) findViewById(R.id.seekBarDia);
+        mesSeekBar = (SeekBar) findViewById(R.id.seekBarMes);
+        anoSeekBar = (SeekBar) findViewById(R.id.seekBarAno);
+        qtdAnosFumouSeekbar = (SeekBar) findViewById(R.id.seekBarQtdFumou);
 
         jaFumou = (CheckBox)findViewById(R.id.checkBoxFumou);
 
@@ -64,6 +73,7 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         mesSeekBar.setOnSeekBarChangeListener(this);
         anoSeekBar.setOnSeekBarChangeListener(this);
         qtdAnosFumouSeekbar.setOnSeekBarChangeListener(this);
+        jaFumou.setOnCheckedChangeListener(this);
 
         diaNascimento = diaSeekBar.getProgress();
         mesNascimento = mesSeekBar.getProgress();
@@ -176,5 +186,22 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
             return "SATANISTA";
 
         return "";
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        switch(buttonView.getId()){
+            case R.id.checkBoxFumou:
+                if(!isChecked){
+                    qtdAnosFumouSeekbar.setVisibility(View.INVISIBLE);
+                    textViewAnosFumou.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    qtdAnosFumouSeekbar.setVisibility(View.VISIBLE);
+                    textViewAnosFumou.setVisibility(View.VISIBLE);
+                }
+        }
+
     }
 }
