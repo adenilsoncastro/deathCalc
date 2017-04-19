@@ -65,7 +65,7 @@ public class result extends AppCompatActivity {
 
     public void setFields(){
 
-        textViewResultNascimento.setText(diaNascimento + "/" + mesNascimento + "/" + (anoNascimento + 1950));
+        textViewResultNascimento.setText(diaNascimento + " de " + getMes(mesNascimento) + " de " + (anoNascimento + 1950));
         textViewExpectativaTitulo.setText("Expecativa de vida para " + (anoNascimento + 1950) + ":");
         textViewResultIdade.setText(idadeAtual + " anos");
         textViewFumaTitulo.setText("Fuma há " + qtdAnosJaFumou + " anos:");
@@ -73,6 +73,54 @@ public class result extends AppCompatActivity {
         textViewReligiao.setText(religiao);
         textViewResultExpectativa.setText(Double.toString(expectativaDeVida));
 
+    }
+
+    public String getMes(int mes) {
+
+        String nomeMes;
+
+        switch (mesNascimento) {
+            case 1:
+                nomeMes = "janeiro";
+                break;
+            case 2:
+                nomeMes = "fevereiro";
+                break;
+            case 3:
+                nomeMes = "março";
+                break;
+            case 4:
+                nomeMes = "abril";
+                break;
+            case 5:
+                nomeMes = "maio";
+                break;
+            case 6:
+                nomeMes = "junho";
+                break;
+            case 7:
+                nomeMes = "julho";
+                break;
+            case 8:
+                nomeMes = "agosto";
+                break;
+            case 9:
+                nomeMes = "setembro";
+                break;
+            case 10:
+                nomeMes = "outubro";
+                break;
+            case 11:
+                nomeMes = "novembro";
+                break;
+            case 12:
+                nomeMes = "dezembro";
+                break;
+            default:
+                nomeMes = "";
+                break;
+        }
+        return nomeMes;
     }
 
     public String doCalc(){
