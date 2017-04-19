@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="0c741ee57cb9506c49c01e6cdd5be467efd2f750">
-        <dex dex="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6d352b11c4cd8276ea0469ab756ef0758f2b1c27\classes.dex" />
+        sha1="63abab86d51d7a9f873bfc5a3525ce7d5d5eaa4c">
+        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c67bb6b6abc27edb18ac7ad1033ac07b443385e1\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
-        <dex dex="C:\Users\oluis\Desktop\Projetos\ProjetosAndroid\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_cbb982eb35731153275d09a954ced499fc3a81b6\classes.dex" />
+        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_de201118a2b163445109bc72562beaf3e8e66419\classes.dex" />
     </item>
 
 </items>

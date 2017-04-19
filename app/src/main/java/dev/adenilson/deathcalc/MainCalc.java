@@ -5,6 +5,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -13,17 +14,21 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
+public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
 
     private int diaNascimento;
     private int mesNascimento;
     private int anoNascimento;
     private int qtdAnosJaFumou;
+    private double idadeAtual;
+    private double expecativaDeVida = 0;
+    private double expecativaDeVidaNascimento = 0;
 
     private TextView diaNascimentoTextView;
     private TextView mesNascimentoTextView;
     private TextView anoNascimentoTextView;
     private TextView qtdAnosJaFumouTextView;
+    private TextView textViewAnosFumou;
 
     private CheckBox jaFumou;
 
@@ -39,8 +44,6 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
     private SeekBar qtdAnosFumouSeekbar;
 
     private Spinner spinnerHumor;
-
-    private TextView textViewAnosFumou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,28 +86,6 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.humor_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHumor.setAdapter(adapter);
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        if(seekBar.getId() == R.id.seekBarDia)
-            diaNascimento = progress;
-        if(seekBar.getId() == R.id.seekBarMes)
-            mesNascimento = progress;
-        if(seekBar.getId() == R.id.seekBarAno)
-            anoNascimento = progress;
-        if(seekBar.getId() == R.id.seekBarQtdFumou)
-            qtdAnosJaFumou = progress;
-
-        updateText();
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
     private void updateText()
@@ -158,7 +139,15 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
     }
 
     public void calcular(View view) {
+
         Intent i = new Intent(this, result.class);
+
+        expecativaDeVidaNascimento = -612.23228 + (0.34138*(anoNascimento + 1950));
+        expecativaDeVida = -612.23228 + (0.34138*(anoNascimento + 1950));
+
+        calcIdadeAtual();
+        calcHumor();
+        calcReligiao();
 
         i.putExtra("diaNascimento", diaNascimento);
         i.putExtra("mesNascimento", mesNascimento);
@@ -169,8 +158,47 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         if(jaFumou.isChecked()){
             i.putExtra("qtdAnosJaFumou", qtdAnosJaFumou);
         }
+        i.putExtra("expectativaDeVida", expecativaDeVida);
+        i.putExtra("idadeAtual", idadeAtual);
 
         startActivity(i);
+    }
+
+    public void calcIdadeAtual(){
+        idadeAtual = 2017 - (anoNascimento + 1950);
+    }
+
+    public void calcHumor(){
+        String spinner = spinnerHumor.getSelectedItem().toString();
+        switch (spinner){
+            case "Otimista":
+                expecativaDeVida = expecativaDeVida*1.1;
+                break;
+            case "Depressivo":
+                expecativaDeVida = expecativaDeVida*0.9;
+                break;
+            case "Estressado":
+                expecativaDeVida = expecativaDeVida*0.8;
+                break;
+        }
+    }
+
+    public void calcReligiao(){
+        String religiao = GetReligiao();
+
+        switch (religiao){
+            case "JUDEU":
+                break;
+            case "CRISTÃO":
+                break;
+            case "MUÇULMANO":
+                break;
+            case "SATANISTA":
+                expecativaDeVida = expecativaDeVida*0.7;
+                break;
+            case "ATEU":
+                break;
+        }
     }
 
     public String GetReligiao(){
@@ -189,6 +217,28 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
     }
 
     @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        if(seekBar.getId() == R.id.seekBarDia)
+            diaNascimento = progress;
+        if(seekBar.getId() == R.id.seekBarMes)
+            mesNascimento = progress;
+        if(seekBar.getId() == R.id.seekBarAno)
+            anoNascimento = progress;
+        if(seekBar.getId() == R.id.seekBarQtdFumou)
+            qtdAnosJaFumou = progress;
+
+        updateText();
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         switch(buttonView.getId()){
@@ -202,6 +252,16 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
                     textViewAnosFumou.setVisibility(View.VISIBLE);
                 }
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        parent.getItemAtPosition(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

@@ -15,13 +15,18 @@ public class result extends AppCompatActivity {
     private int mesNascimento;
     private int anoNascimento;
     private int qtdAnosJaFumou;
+    private double idadeAtual;
+    private double expectativaDeVida;
     private boolean jaFumou;
     private String religiao;
     private String humor;
 
     private TextView textViewResultNascimento;
+    private TextView textViewExpectativaTitulo;
     private TextView textViewResultExpectativa;
     private TextView textViewResultIdade;
+    private TextView textViewReligiao;
+    private TextView textViewFumaTitulo;
     private TextView textViewResultFuma;
 
     @Override
@@ -30,8 +35,11 @@ public class result extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         textViewResultNascimento = (TextView)findViewById(R.id.textViewResultNascimento);
+        textViewExpectativaTitulo = (TextView)findViewById(R.id.textViewExpectativaTitulo);
         textViewResultExpectativa = (TextView)findViewById(R.id.textViewResultExpectativa);
         textViewResultIdade = (TextView)findViewById(R.id.textViewResultIdade);
+        textViewReligiao = (TextView)findViewById(R.id.textViewReligiao);
+        textViewFumaTitulo = (TextView)findViewById(R.id.textViewFumaTitulo);
         textViewResultFuma = (TextView)findViewById(R.id.textViewResultFuma);
 
         Intent i = getIntent();
@@ -39,6 +47,8 @@ public class result extends AppCompatActivity {
         if(i != null){
             Bundle extras = i.getExtras();
 
+            idadeAtual = extras.getDouble("idadeAtual");
+            expectativaDeVida = extras.getDouble("expectativaDeVida");
             diaNascimento = extras.getInt("diaNascimento");
             mesNascimento = extras.getInt("mesNascimento");
             anoNascimento = extras.getInt("anoNascimento");
@@ -56,8 +66,12 @@ public class result extends AppCompatActivity {
     public void setFields(){
 
         textViewResultNascimento.setText(diaNascimento + "/" + mesNascimento + "/" + (anoNascimento + 1950));
-        textViewResultFuma.setText(Integer.toString(qtdAnosJaFumou));
-        textViewResultExpectativa.setText(doCalc());
+        textViewExpectativaTitulo.setText("Expecativa de vida para " + (anoNascimento + 1950) + ":");
+        textViewResultIdade.setText(idadeAtual + " anos");
+        textViewFumaTitulo.setText("Fuma há " + qtdAnosJaFumou + " anos:");
+        textViewResultFuma.setText("Menos " + qtdAnosJaFumou + " anos de expectativa de vida");
+        textViewReligiao.setText(religiao);
+        textViewResultExpectativa.setText(Double.toString(expectativaDeVida));
 
     }
 
