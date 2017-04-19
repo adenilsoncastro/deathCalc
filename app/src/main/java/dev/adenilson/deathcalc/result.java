@@ -28,6 +28,8 @@ public class result extends AppCompatActivity {
     private TextView textViewReligiao;
     private TextView textViewFumaTitulo;
     private TextView textViewResultFuma;
+    private TextView textViewHumorTitulo;
+    private TextView textViewHumorResultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class result extends AppCompatActivity {
         textViewReligiao = (TextView)findViewById(R.id.textViewReligiao);
         textViewFumaTitulo = (TextView)findViewById(R.id.textViewFumaTitulo);
         textViewResultFuma = (TextView)findViewById(R.id.textViewResultFuma);
+        textViewHumorTitulo = (TextView)findViewById(R.id.textViewHumor);
+        textViewHumorResultado = (TextView)findViewById(R.id.textViewResultHumor);
 
         Intent i = getIntent();
 
@@ -72,7 +76,8 @@ public class result extends AppCompatActivity {
         textViewResultFuma.setText("Menos " + qtdAnosJaFumou + " anos de expectativa de vida");
         textViewReligiao.setText(religiao);
         textViewResultExpectativa.setText(Double.toString(expectativaDeVida));
-
+        textViewHumorTitulo.setText(humor);
+        textViewHumorResultado.setText(getDescricaoHumor(humor));
     }
 
     public String getMes(int mes) {
@@ -121,6 +126,27 @@ public class result extends AppCompatActivity {
                 break;
         }
         return nomeMes;
+    }
+
+    public String getDescricaoHumor(String humor){
+
+        humor = humor.toUpperCase();
+        String descricaoHumor = "";
+
+        switch(humor) {
+            case "OTIMISTA":
+                descricaoHumor = "Mais 10% da expectativa de vida";
+                break;
+            case "DEPRESSIVA":
+                descricaoHumor = "Menos 10% da expectativa de vida";
+                break;
+            case "ESTERSSADA":
+                descricaoHumor = "Menos 20% da expectativa de vida";
+                break;
+            default:
+                break;
+        }
+        return descricaoHumor;
     }
 
     public String doCalc(){
