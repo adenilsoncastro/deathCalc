@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
 
@@ -86,6 +87,8 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.humor_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHumor.setAdapter(adapter);
+
+        updateText();
     }
 
     private void updateText()
@@ -93,6 +96,9 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         diaNascimentoTextView.setText(Integer.toString(diaNascimento)); // Por que o textview não aceita o inteiro?
 
         switch(mesNascimento){
+            case 0:
+                mesNascimentoTextView.setText("Jan");
+                break;
             case 1:
                 mesNascimentoTextView.setText("Jan");
                 break;
@@ -140,6 +146,10 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
 
     public void calcular(View view) {
 
+        if(!validar()) {
+            return;
+        }
+
         Intent i = new Intent(this, result.class);
 
         expecativaDeVidaNascimento = -612.23228 + (0.34138*(anoNascimento + 1950));
@@ -162,6 +172,15 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         i.putExtra("idadeAtual", idadeAtual);
 
         startActivity(i);
+    }
+
+    public boolean validar(){
+        if(GetReligiao() == "") {
+            Toast.makeText(this, "Selecione uma religião", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
     public void calcIdadeAtual(){
@@ -219,23 +238,68 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if(seekBar.getId() == R.id.seekBarDia)
-            diaNascimento = progress;
-        if(seekBar.getId() == R.id.seekBarMes)
-            mesNascimento = progress;
-        if(seekBar.getId() == R.id.seekBarAno)
+            diaNascimento = progress + 1;
+        if(seekBar.getId() == R.id.seekBarMes) {
+            mesNascimento = progress + 1;
+            ConfigureDate();
+        }
+        if(seekBar.getId() == R.id.seekBarAno){
             anoNascimento = progress;
+            ConfigureDate();
+        }
         if(seekBar.getId() == R.id.seekBarQtdFumou)
             qtdAnosJaFumou = progress;
 
         updateText();
     }
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-    }
+    public void ConfigureDate(){
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+        switch(mesNascimento){
+            case 1:
+                diaSeekBar.setMax(30);
+                break;
+            case 2:
+                if(isAnoBissexto(anoNascimento + 1950)){
+                    diaSeekBar.setMax(28);
+                }
+                else{
+                    diaSeekBar.setMax(27);
+                }
+                break;
+            case 3:
+                diaSeekBar.setMax(30);
+                break;
+            case 4:
+                diaSeekBar.setMax(29);
+                break;
+            case 5:
+                diaSeekBar.setMax(30);
+                break;
+            case 6:
+                diaSeekBar.setMax(29);
+                break;
+            case 7:
+                diaSeekBar.setMax(30);
+                break;
+            case 8:
+                diaSeekBar.setMax(30);
+                break;
+            case 9:
+                diaSeekBar.setMax(29);
+                break;
+            case 10:
+                diaSeekBar.setMax(30);
+                break;
+            case 11:
+                diaSeekBar.setMax(29);
+                break;
+            case 12:
+                diaSeekBar.setMax(30);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -246,13 +310,32 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
                 if(!isChecked){
                     qtdAnosFumouSeekbar.setVisibility(View.INVISIBLE);
                     textViewAnosFumou.setVisibility(View.INVISIBLE);
+                    qtdAnosJaFumouTextView.setVisibility(View.INVISIBLE);
                 }
                 else{
                     qtdAnosFumouSeekbar.setVisibility(View.VISIBLE);
                     textViewAnosFumou.setVisibility(View.VISIBLE);
+                    qtdAnosJaFumouTextView.setVisibility(View.VISIBLE);
                 }
         }
 
+    }
+
+    public boolean isAnoBissexto(int ano) {
+        if ( ( ano % 4 == 0 && ano % 100 != 0 ) || ( ano % 400 == 0 ) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
     @Override
