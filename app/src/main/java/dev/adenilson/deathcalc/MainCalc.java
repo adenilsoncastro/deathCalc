@@ -1,7 +1,6 @@
 package dev.adenilson.deathcalc;
 
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +11,16 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.joda.time.DateTime;
+import org.joda.time.Years;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import java.util.Random;
 
 public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
 
@@ -22,8 +29,11 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
     private int anoNascimento;
     private int qtdAnosJaFumou;
     private double idadeAtual;
-    private double expecativaDeVida = 0;
-    private double expecativaDeVidaNascimento = 0;
+    private double expectativaDeVida = 0;
+    private double expectativaDeVidaNascimento = 0;
+    private double resultExpectativa = 0;
+
+    private boolean isReligionPositive = false;
 
     private TextView diaNascimentoTextView;
     private TextView mesNascimentoTextView;
@@ -45,6 +55,9 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
     private SeekBar qtdAnosFumouSeekbar;
 
     private Spinner spinnerHumor;
+
+
+    Random randomReligion = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +101,16 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHumor.setAdapter(adapter);
 
+        qtdAnosFumouSeekbar.setVisibility(View.INVISIBLE);
+        textViewAnosFumou.setVisibility(View.INVISIBLE);
+        qtdAnosJaFumouTextView.setVisibility(View.INVISIBLE);
+
         updateText();
     }
 
     private void updateText()
     {
-        diaNascimentoTextView.setText(Integer.toString(diaNascimento)); // Por que o textview não aceita o inteiro?
+        diaNascimentoTextView.setText(Integer.toString(diaNascimento)); //
 
         switch(mesNascimento){
             case 0:
@@ -152,105 +169,137 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
 
         Intent i = new Intent(this, result.class);
 
-        expecativaDeVidaNascimento = -612.23228 + (0.34138*(anoNascimento + 1950));
-        expecativaDeVida = -612.23228 + (0.34138*(anoNascimento + 1950));
+        expectativaDeVidaNascimento = -612.23228 + (0.34138*(anoNascimento + 1950));
+        expectativaDeVida = -612.23228 + (0.34138*(anoNascimento + 1950));
 
         calcIdadeAtual();
+        calcFumou();
         calcHumor();
         calcReligiao();
+
+        resultExpectativa = expectativaDeVida - idadeAtual;
 
         i.putExtra("diaNascimento", diaNascimento);
         i.putExtra("mesNascimento", mesNascimento);
         i.putExtra("anoNascimento", anoNascimento);
         i.putExtra("religiao", GetReligiao());
+        i.putExtra("isReligionPositive", isReligionPositive);
         i.putExtra("humor", spinnerHumor.getSelectedItem().toString());
         i.putExtra("jaFumou", jaFumou.isChecked());
         if(jaFumou.isChecked()){
             i.putExtra("qtdAnosJaFumou", qtdAnosJaFumou);
         }
-        i.putExtra("expectativaDeVida", expecativaDeVida);
+        i.putExtra("expectativaDeVidaNascimento", expectativaDeVidaNascimento);
         i.putExtra("idadeAtual", idadeAtual);
+        i.putExtra("resultExpectativa", resultExpectativa);
 
         startActivity(i);
+        finish();
     }
 
     public boolean validar(){
+
+        if((diaNascimento == 0)){
+            Toast.makeText(this, "Informe uma data de nascimento válida", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         if(GetReligiao() == "") {
             Toast.makeText(this, "Selecione uma religião", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
     }
 
     public void calcIdadeAtual(){
-        idadeAtual = 2017 - (anoNascimento + 1950);
+
+        DateTime dNow = new DateTime();
+        String dateBday = Integer.toString(anoNascimento+1950) + "/" + Integer.toString(mesNascimento) + "/" + Integer.toString(diaNascimento);
+
+        DateTimeFormatter dft = DateTimeFormat.forPattern("yyyy/MM/dd");
+        DateTime dateBirthday = dft.parseDateTime(dateBday);
+
+        Years age = Years.yearsBetween(dateBirthday, dNow);
+
+        idadeAtual = age.getYears();
+    }
+
+    public void calcFumou(){
+        expectativaDeVida = expectativaDeVida - qtdAnosJaFumou;
     }
 
     public void calcHumor(){
         String spinner = spinnerHumor.getSelectedItem().toString();
         switch (spinner){
             case "Otimista":
-                expecativaDeVida = expecativaDeVida*1.1;
+                expectativaDeVida = expectativaDeVida*1.1;
                 break;
             case "Depressivo":
-                expecativaDeVida = expecativaDeVida*0.9;
+                expectativaDeVida = expectativaDeVida*0.9;
                 break;
             case "Estressado":
-                expecativaDeVida = expecativaDeVida*0.8;
-                break;
-        }
-    }
-
-    public void calcReligiao(){
-        String religiao = GetReligiao();
-
-        switch (religiao){
-            case "JUDEU":
-                break;
-            case "CRISTÃO":
-                break;
-            case "MUÇULMANO":
-                break;
-            case "SATANISTA":
-                expecativaDeVida = expecativaDeVida*0.7;
-                break;
-            case "ATEU":
+                expectativaDeVida = expectativaDeVida*0.8;
                 break;
         }
     }
 
     public String GetReligiao(){
         if(radioAteu.isChecked())
-            return "ATEU";
+            return "Ateu";
         if(radioCristao.isChecked())
-            return "CRISTAO";
+            return "Cristão";
         if(radioJudeu.isChecked())
-            return "JUDEU";
+            return "Judeu";
         if(radioMuculmano.isChecked())
-            return "MUCULMANO";
+            return "Muçulmano";
         if(radioSatanista.isChecked())
-            return "SATANISTA";
+            return "Satanista";
 
         return "";
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        if(seekBar.getId() == R.id.seekBarDia)
-            diaNascimento = progress + 1;
-        if(seekBar.getId() == R.id.seekBarMes) {
-            mesNascimento = progress + 1;
-            ConfigureDate();
+    public void calcReligiao(){
+        String religiao = GetReligiao();
+        int random = randomReligion.nextInt(2);//Random: 1 = + / 0 = -
+        switch (religiao){
+            case "Judeu":
+                if(random == 1){
+                    expectativaDeVida = expectativaDeVida*1.1;
+                    isReligionPositive = true;
+                }
+                else if(random == 0 ){
+                    expectativaDeVida = expectativaDeVida*0.9;
+                    isReligionPositive = false;
+                }
+                break;
+            case "Cristão":
+                if(random == 1){
+                    expectativaDeVida = expectativaDeVida*1.1;
+                    isReligionPositive = true;
+                }
+                else if(random == 0 ){
+                    expectativaDeVida = expectativaDeVida*0.9;
+                    isReligionPositive = false;
+                }
+                break;
+            case "Muçulmano":
+                if(random == 1){
+                    expectativaDeVida = expectativaDeVida*1.2;
+                    isReligionPositive = true;
+                }
+                else if(random == 0 ){
+                    expectativaDeVida = expectativaDeVida*0.8;
+                    isReligionPositive = false;
+                }
+                break;
+            case "Satanista":
+                expectativaDeVida = expectativaDeVida*0.7;
+                isReligionPositive = false;
+                break;
+            case "Ateu":
+                isReligionPositive = false;
+                break;
         }
-        if(seekBar.getId() == R.id.seekBarAno){
-            anoNascimento = progress;
-            ConfigureDate();
-        }
-        if(seekBar.getId() == R.id.seekBarQtdFumou)
-            qtdAnosJaFumou = progress;
-
-        updateText();
     }
 
     public void ConfigureDate(){
@@ -302,13 +351,41 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
         }
     }
 
+    public boolean isAnoBissexto(int ano) {
+        if ( ( ano % 4 == 0 && ano % 100 != 0 ) || ( ano % 400 == 0 ) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        if(seekBar.getId() == R.id.seekBarDia)
+            diaNascimento = progress + 1;
+        if(seekBar.getId() == R.id.seekBarMes) {
+            mesNascimento = progress + 1;
+            ConfigureDate();
+        }
+        if(seekBar.getId() == R.id.seekBarAno){
+            anoNascimento = progress;
+            ConfigureDate();
+            qtdAnosFumouSeekbar.setMax(67 - anoNascimento);
+        }
+        if(seekBar.getId() == R.id.seekBarQtdFumou)
+            qtdAnosJaFumou = progress;
+
+        updateText();
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         switch(buttonView.getId()){
             case R.id.checkBoxFumou:
                 if(!isChecked){
-                    qtdAnosFumouSeekbar.setVisibility(View.INVISIBLE);
+                        qtdAnosFumouSeekbar.setVisibility(View.INVISIBLE);
                     textViewAnosFumou.setVisibility(View.INVISIBLE);
                     qtdAnosJaFumouTextView.setVisibility(View.INVISIBLE);
                 }
@@ -319,15 +396,6 @@ public class MainCalc extends AppCompatActivity implements SeekBar.OnSeekBarChan
                 }
         }
 
-    }
-
-    public boolean isAnoBissexto(int ano) {
-        if ( ( ano % 4 == 0 && ano % 100 != 0 ) || ( ano % 400 == 0 ) ){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     @Override

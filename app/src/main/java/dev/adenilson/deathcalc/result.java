@@ -16,9 +16,11 @@ public class result extends AppCompatActivity {
     private int anoNascimento;
     private int qtdAnosJaFumou;
     private double idadeAtual;
-    private double expectativaDeVida;
+    private double expectativaDeVidaNascimento;
+    private double resultExpectativa;
     private boolean jaFumou;
     private String religiao;
+    private boolean isReligionPositive = false;
     private String humor;
 
     private TextView textViewResultNascimento;
@@ -26,10 +28,12 @@ public class result extends AppCompatActivity {
     private TextView textViewResultExpectativa;
     private TextView textViewResultIdade;
     private TextView textViewReligiao;
+    private TextView textViewResultReligiao;
     private TextView textViewFumaTitulo;
     private TextView textViewResultFuma;
     private TextView textViewHumorTitulo;
     private TextView textViewHumorResultado;
+    private TextView textViewResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +45,12 @@ public class result extends AppCompatActivity {
         textViewResultExpectativa = (TextView)findViewById(R.id.textViewResultExpectativa);
         textViewResultIdade = (TextView)findViewById(R.id.textViewResultIdade);
         textViewReligiao = (TextView)findViewById(R.id.textViewReligiao);
+        textViewResultReligiao = (TextView)findViewById(R.id.textViewResultReligiao);
         textViewFumaTitulo = (TextView)findViewById(R.id.textViewFumaTitulo);
         textViewResultFuma = (TextView)findViewById(R.id.textViewResultFuma);
         textViewHumorTitulo = (TextView)findViewById(R.id.textViewHumor);
         textViewHumorResultado = (TextView)findViewById(R.id.textViewResultHumor);
+        textViewResult = (TextView)findViewById(R.id.textViewResult);
 
         Intent i = getIntent();
 
@@ -52,32 +58,39 @@ public class result extends AppCompatActivity {
             Bundle extras = i.getExtras();
 
             idadeAtual = extras.getDouble("idadeAtual");
-            expectativaDeVida = extras.getDouble("expectativaDeVida");
+            expectativaDeVidaNascimento = extras.getDouble("expectativaDeVidaNascimento");
             diaNascimento = extras.getInt("diaNascimento");
             mesNascimento = extras.getInt("mesNascimento");
             anoNascimento = extras.getInt("anoNascimento");
             religiao = extras.getString("religiao");
+            isReligionPositive = extras.getBoolean("isReligionPositive");
             humor = extras.getString("humor");
             jaFumou = extras.getBoolean("jaFumou");
             if(jaFumou){
                 qtdAnosJaFumou = extras.getInt("qtdAnosJaFumou");
             }
+            resultExpectativa = extras.getDouble("resultExpectativa");
         }
 
         setFields();
     }
 
     public void setFields(){
-
         textViewResultNascimento.setText(diaNascimento + " de " + getMes(mesNascimento) + " de " + (anoNascimento + 1950));
         textViewExpectativaTitulo.setText("Expecativa de vida para " + (anoNascimento + 1950) + ":");
         textViewResultIdade.setText(idadeAtual + " anos");
         textViewFumaTitulo.setText("Fuma há " + qtdAnosJaFumou + " anos:");
         textViewResultFuma.setText("Menos " + qtdAnosJaFumou + " anos de expectativa de vida");
         textViewReligiao.setText(religiao);
-        textViewResultExpectativa.setText(Double.toString(expectativaDeVida));
+        textViewResultReligiao.setText(getReligiao(religiao));
+        textViewResultExpectativa.setText(String.format("%1$.2f", expectativaDeVidaNascimento) + " anos");
         textViewHumorTitulo.setText(humor);
         textViewHumorResultado.setText(getDescricaoHumor(humor));
+        if(resultExpectativa > 0)
+            textViewResult.setText(String.format("%1$.2f", resultExpectativa) + " anos de vida");
+        else
+            textViewResult.setText("Já passaram " + String.format("%1$.2f", resultExpectativa*(-1)) + " anos da sua morte!");
+
     }
 
     public String getMes(int mes) {
@@ -130,17 +143,16 @@ public class result extends AppCompatActivity {
 
     public String getDescricaoHumor(String humor){
 
-        humor = humor.toUpperCase();
         String descricaoHumor = "";
 
         switch(humor) {
-            case "OTIMISTA":
+            case "Otimista":
                 descricaoHumor = "Mais 10% da expectativa de vida";
                 break;
-            case "DEPRESSIVA":
+            case "Depressivo":
                 descricaoHumor = "Menos 10% da expectativa de vida";
                 break;
-            case "ESTERSSADA":
+            case "Estressado":
                 descricaoHumor = "Menos 20% da expectativa de vida";
                 break;
             default:
@@ -149,10 +161,44 @@ public class result extends AppCompatActivity {
         return descricaoHumor;
     }
 
-    public String doCalc(){
+    public String getReligiao(String religiao){
+        if(isReligionPositive == true){
+            switch (religiao) {
+                case "Judeu":
+                    return "Infere em 10% a mais de expectativa de vida";
 
+                case "Cristão":
+                    return "Infere em 10% a mais de expectativa de vida";
+
+                case "Muçulmano":
+                    return "Infere em 20% a mais de expectativa de vida";
+
+                case "Satanista":
+                    return "Infere em 30% a menos de expectativa de vida";
+
+                case "Ateu":
+                    return "Infere em 0% da expectativa de vida";
+            }
+        }
+        else{
+            switch (religiao) {
+                case "Judeu":
+                    return "Infere em 10% a menos de expectativa de vida";
+
+                case "Cristão":
+                    return "Infere em 10% a menos de expectativa de vida";
+
+                case "Muçulmano":
+                    return "Infere em 20% a menos de expectativa de vida";
+
+                case "Satanista":
+                    return "Infere em 30% a menos de expectativa de vida";
+
+                case "Ateu":
+                    return "Infere em 0% da expectativa de vida";
+            }
+        }
         return "";
-
     }
 
     public void voltar(View view)

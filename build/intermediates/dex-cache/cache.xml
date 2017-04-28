@@ -3,6 +3,15 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\Adenilson\.gradle\caches\modules-2\files-2.1\joda-time\joda-time\2.9.9\f7b520c458572890807d143670c9b24f4de90897\joda-time-2.9.9.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f7b520c458572890807d143670c9b24f4de90897">
+        <dex dex="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\transforms\dex\debug\folders\1000\10\joda-time-2.9.9_f6cedf6092772f7ef29eab43d4c798b43036c911\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\Adenilson\AndroidStudioProjects\deathCalc\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
